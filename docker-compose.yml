@@ -1,0 +1,16 @@
+version: "3.1"
+services:
+  phpbbcontainer:
+    image: dane-bb-test:latest
+    ports:
+      - "8080:80"
+    links:
+      - dbcontainer
+
+  dbcontainer:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_USER: bb
+      MYSQL_PASSWORD: bb
+      MYSQL_DATABASE: bb
