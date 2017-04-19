@@ -4,14 +4,14 @@ FROM php:apache
 #Copy php.ini from config (in repo) to /usr/local/etc/php
 COPY config /usr/local/etc/php
 
-#Get bzip2 for later decompressing of phpBB download, php-pear beacuse pears are nice (or for zip)
-RUN apt-get update && apt-get install -y bzip2 php-pear unzip
+#Get bzip2 for later decompressing of phpBB download, php-pear beacuse pears are nice (or for zip), zlib for zip ext
+RUN apt-get update && apt-get install -y bzip2 php-pear unzip zlib1g-dev
 
 #install zip from pecl
 RUN pecl install zip
 
 #Add mysqli to php install
-RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install mysqli zip
 
 #Get phpBB
 WORKDIR "/var/www/html"
